@@ -41,3 +41,7 @@ build/
 .env
 .env.*
 !.env.example
+
+# Local development notes
+/AGENTS.md
+/Improvements.txt
