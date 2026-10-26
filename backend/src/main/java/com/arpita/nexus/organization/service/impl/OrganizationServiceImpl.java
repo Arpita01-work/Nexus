@@ -14,6 +14,7 @@ import com.arpita.nexus.organization.service.OrganizationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.arpita.nexus.security.userdetails.CurrentUserProvider;
 
 import java.util.List;
 import java.util.UUID;
@@ -26,6 +27,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     private final OrganizationRepository organizationRepository;
 
     private final OrganizationMapper organizationMapper;
+    private final CurrentUserProvider currentUserProvider;
 
     @Override
     public OrganizationResponse createOrganization(CreateOrganizationRequest request) {
@@ -49,6 +51,11 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Transactional(readOnly = true)
     public OrganizationResponse getOrganization(UUID id) {
 
+        java.util.UUID currentOrgId = currentUserProvider.getCurrentOrganizationId();
+        if (!id.equals(currentOrgId)) {
+            // Hide existence of other organizations
+            throw new org.springframework.security.access.AccessDeniedException("Access denied");
+        }
         Organization organization = organizationRepository.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Organization not found."));
@@ -60,6 +67,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     public OrganizationResponse updateOrganization(UUID id,
                                                    UpdateOrganizationRequest request) {
 
+        java.util.UUID currentOrgId = currentUserProvider.getCurrentOrganizationId();
+        if (!id.equals(currentOrgId)) {
+            throw new org.springframework.security.access.AccessDeniedException("Access denied");
+        }
         Organization organization = organizationRepository.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Organization not found."));
@@ -74,6 +85,10 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     public void deleteOrganization(UUID id) {
 
+        java.util.UUID currentOrgId = currentUserProvider.getCurrentOrganizationId();
+        if (!id.equals(currentOrgId)) {
+            throw new org.springframework.security.access.AccessDeniedException("Access denied");
+        }
         Organization organization = organizationRepository.findById(id)
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Organization not found."));
@@ -91,8 +106,10 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public List<OrganizationResponse> getAll() {
+        java.util.UUID currentOrgId = currentUserProvider.getCurrentOrganizationId();
         return organizationRepository.findAll()
                 .stream()
+                .filter(org -> org.getId().equals(currentOrgId))
                 .map(organizationMapper::toResponse)
                 .toList();
     }

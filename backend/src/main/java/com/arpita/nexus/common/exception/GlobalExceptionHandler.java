@@ -1,5 +1,7 @@
 package com.arpita.nexus.common.exception;
 
+import com.arpita.nexus.common.response.ApiResponse;
+import com.arpita.nexus.common.response.ApiResponseBuilder;
 import com.arpita.nexus.common.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -81,6 +83,19 @@ public class GlobalExceptionHandler {
 
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(response);
+    }
+
+    @ExceptionHandler(BadRequestException.class)
+    public ResponseEntity<ErrorResponse> handleBadRequest(BadRequestException ex) {
+
+        ErrorResponse response = ErrorResponse.builder()
+            .success(false)
+            .message(ex.getMessage())
+            .errors(List.of(ErrorCode.BAD_REQUEST.name()))
+            .build();
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(response);
     }
 
 }

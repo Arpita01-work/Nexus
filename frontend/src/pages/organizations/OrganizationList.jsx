@@ -72,16 +72,30 @@ const {
   return (
     <Paper sx={{ p: 3 }}>
       <Box
-  sx={{
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-    mb: 3,
-  }}
->
-  <Typography variant="h4" fontWeight={600}>
-    Organizations
-  </Typography>
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          mb: 3,
+        }}
+      >
+<Box>
+    <Typography
+        variant="h4"
+        fontWeight={600}
+    >
+        Organizations
+    </Typography>
+
+    <Typography
+        variant="body2"
+        color="text.secondary"
+        sx={{ mt: 0.5 }}
+    >
+        Manage organizations registered
+        with Nexus
+    </Typography>
+</Box>
 
   <Button
     variant="contained"
@@ -94,6 +108,29 @@ const {
   </Button>
 </Box>
 
+<Box
+    sx={{
+        mb: 2,
+        display: "flex",
+        alignItems: "center",
+        gap: 1,
+    }}
+>
+    <Typography
+        variant="body2"
+        color="text.secondary"
+    >
+        Total Organizations:
+    </Typography>
+
+    <Typography
+        variant="body2"
+        fontWeight={700}
+    >
+        {organizations.length}
+    </Typography>
+</Box>
+
       {error && (
         <Alert severity="error" sx={{ mb: 2 }}>
           {error}
@@ -101,7 +138,12 @@ const {
       )}
 
       {loading ? (
-        <Box textAlign="center" mt={5}>
+        <Box
+            sx={{
+                textAlign: "center",
+                mt: 5,
+            }}
+        >
           <CircularProgress />
         </Box>
       ) : (

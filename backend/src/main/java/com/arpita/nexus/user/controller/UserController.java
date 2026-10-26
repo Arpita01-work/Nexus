@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.UUID;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
+@PreAuthorize("hasRole('ORGANIZATION_ADMIN')")
 public class UserController {
 
     private final UserService userService;
@@ -66,6 +68,25 @@ public class UserController {
                         "User updated successfully.",
                         userService.updateUser(id, request)
                 )
+        );
+    }
+
+    @PatchMapping("/{id}/status")
+    public ResponseEntity<ApiResponse<Void>> updateUserStatus(
+        @PathVariable UUID id,
+        @RequestParam boolean active) {
+
+        userService.updateUserStatus(id, active);
+
+        String message = active
+            ? "User activated successfully."
+            : "User deactivated successfully.";
+
+        return ResponseEntity.ok(
+            ApiResponseBuilder.success(
+                message,
+                null
+            )
         );
     }
 

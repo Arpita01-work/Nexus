@@ -1,5 +1,6 @@
-package com.arpita.nexus.user.dto;
+    package com.arpita.nexus.user.dto;
 
+import com.arpita.nexus.user.entity.Role;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -26,9 +27,12 @@ public class UserResponse {
 
     private String jobTitle;
 
+    private Role role;
+
     private Boolean active;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 }
+
