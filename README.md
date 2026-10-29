@@ -1,145 +1,160 @@
-# Nexus
-
 <div align="center">
 
-# Enterprise Workforce & Operations Management Platform
+# NEXUS
 
-A production-grade enterprise platform built to demonstrate modern software engineering practices, scalable system design, and cloud-native application development using the Java & Spring ecosystem.
+### A Modular Foundation for Enterprise Business Systems
 
-![Java](https://img.shields.io/badge/Java-21-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5-6DB33F?style=for-the-badge&logo=springboot&logoColor=white)
-![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)
-![Maven](https://img.shields.io/badge/Maven-C71A36?style=for-the-badge&logo=apachemaven&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)
+*A multi-tenant SaaS platform for building business-specific ERP and CRM solutions through reusable, centralized modules.*
+
+<br/>
+
+![Java 21](https://img.shields.io/badge/Java-21-333333?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-3.5.x-333333?style=flat-square&logo=springboot&logoColor=white)
+![React](https://img.shields.io/badge/React-Vite-333333?style=flat-square&logo=react&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-17-333333?style=flat-square&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-333333?style=flat-square&logo=docker&logoColor=white)
 
 </div>
 
 ---
 
-# Overview
+## Overview
 
-Nexus is a modern enterprise workforce and operations management platform designed with a strong emphasis on clean architecture, maintainability, scalability, and production-ready development practices.
+Different organizations often require similar business capabilities, including employee management, project tracking, task management, document handling, and workflow automation. Developing and maintaining these capabilities independently for every organization introduces unnecessary duplication, cost, and complexity.
 
-Rather than focusing solely on implementing business features, the project emphasizes how enterprise software is architected, developed, tested, secured, containerized, documented, and deployed in real-world environments.
+Nexus aims to address this challenge through a centralized collection of reusable business modules that can serve related organizations while preserving their independent users, data, and operations.
 
-The long-term objective is to build a complete business platform that demonstrates backend engineering, distributed system design, cloud deployment, DevOps practices, and modern frontend architecture while following industry-standard development workflows.
+The objective is to establish a flexible and scalable foundation on which business-specific ERP and CRM systems can be developed without rebuilding common functionality from scratch.
 
----
+## Features
 
-# Design Goals
+- Organization registration and onboarding
+- Authentication and account activation
+- Employee account management
+- Dedicated employee workspace
+- Project and task management
+- Document and workflow management
+- Notifications and operational analytics
 
-Nexus is being developed to demonstrate:
+*The project is under active development. Not all listed features have been implemented.*
 
-- Production-ready backend engineering
-- Enterprise application architecture
-- Secure authentication & authorization
-- Cloud-native application development
-- Modular and maintainable codebase
-- Scalable frontend architecture
-- Modern DevOps workflow
-- Automated testing & deployment
-- Clean and extensible software design
+## Technology Stack
 
----
+| Category | Technology | Purpose |
+|---|---|---|
+| Language | Java 21 | Backend application development |
+| Backend | Spring Boot 3.5.x | Application services and REST APIs |
+| Frontend | React, Vite | Administrator and employee interfaces |
+| UI Framework | Material UI | Reusable interface components |
+| Database | PostgreSQL 17 | Relational data persistence |
+| ORM | Spring Data JPA, Hibernate | Persistence and object-relational mapping |
+| API Architecture | REST | Frontend-backend communication |
+| Security | Spring Security | Authentication and authorization |
+| Validation | Jakarta Bean Validation | Request and data validation |
+| Database Migration | Flyway | Version-controlled schema changes |
+| Object Mapping | MapStruct | Mapping between application objects and DTOs |
+| Build Tool | Maven | Dependency and build management |
+| Infrastructure | Docker, Docker Compose | Containerization and local development |
+| Testing | JUnit 5, Mockito | Backend testing |
+| API Documentation | Swagger / OpenAPI | API exploration and documentation |
+| Version Control | Git, GitHub | Source control and collaboration |
 
-# Technology Stack
+## Project Structure
 
-| Category | Technologies |
-|-----------|--------------|
-| Language | Java 21 |
-| Backend | Spring Boot |
-| Frontend | React, Vite |
-| UI | Material UI |
-| Database | PostgreSQL |
-| ORM | Spring Data JPA, Hibernate |
-| API | RESTful APIs |
-| Security | Spring Security, JWT, OAuth 2.0 |
-| Validation | Jakarta Bean Validation |
-| Database Migration | Flyway |
-| Object Mapping | MapStruct |
-| Build Tool | Maven |
-| Containerization | Docker, Docker Compose |
-| Caching | Redis *(planned)* |
-| Messaging | RabbitMQ, Apache Kafka *(planned)* |
-| Search Engine | Elasticsearch *(planned)* |
-| Documentation | Swagger / OpenAPI *(planned)* |
-| Testing | JUnit 5, Mockito, Testcontainers |
-| Monitoring | Spring Boot Actuator, Micrometer *(planned)* |
-| Logging | SLF4J, Logback |
-| Cloud | AWS *(planned)* |
-| CI/CD | GitHub Actions *(planned)* |
-| Version Control | Git & GitHub |
+The repository separates the backend and frontend applications, with supporting documentation and development infrastructure.
 
----
+```text
+Nexus/
+├── backend/
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/
+│   │   │   └── resources/
+│   │   └── test/
+│   ├── pom.xml
+│   └── mvnw
+├── frontend/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── context/
+│   │   ├── pages/
+│   │   └── routes/
+│   └── package.json
+├── docs/
+│   ├── PRD.md
+│   ├── SRS.md
+│   └── architecture/
+├── docker-compose.yml
+└── README.md
+```
 
-# Platform Architecture
+*This illustrates the intended repository organization; exact filenames and directories may vary.*
 
-Nexus follows a **production-oriented Modular Monolith Architecture** designed around clear business boundaries, loose coupling, and high cohesion. Each business capability is implemented as an independent module while remaining part of a unified deployable application.
+## Getting Started
 
-The backend follows a layered architecture consisting of Controllers, Services, Repositories, Domain Models, DTOs, and Mappers. Cross-cutting concerns such as exception handling, validation, logging, security, and database migrations are centralized to ensure consistency throughout the platform.
+### Prerequisites
 
-The frontend adopts a feature-oriented architecture using reusable components, custom hooks, centralized API communication, and shared layouts to encourage scalability, maintainability, and code reuse.
+- Git
+- Java Development Kit (JDK) 21
+- Maven, if not using the Maven Wrapper
+- Node.js and npm
+- Docker Desktop or Docker Engine with Docker Compose
 
-The platform is designed with future evolution in mind, allowing gradual adoption of distributed services, asynchronous messaging, caching, and cloud-native infrastructure as the application grows.
-
----
-
-# Engineering Practices
-
-The project follows modern software engineering principles including:
-
-- Modular Monolith Architecture
-- Layered Architecture
-- Clean Code Principles
-- SOLID Principles
-- RESTful API Design
-- DTO-Based API Contracts
-- Global Exception Handling
-- Database Versioning with Flyway
-- Environment-Based Configuration
-- Dockerized Development Environment
-- Git Branching Strategy
-- Code Formatting with Prettier & EditorConfig
-- Automated Testing
-- CI/CD Ready Structure
-- Security-First Development Approach
-
----
-
-# Getting Started
-
-## Clone Repository
+### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/Arpita01-work/Nexus.git
-```
-
-```bash
 cd Nexus
 ```
 
----
+### 2. Configure the Environment
 
-## Start PostgreSQL
+Review the backend and Docker Compose configuration. Set the required PostgreSQL credentials and database connection settings for your local environment.
+
+Do not commit passwords, credentials, or other secrets to version control.
+
+### 3. Start the Database
+
+From the repository root:
 
 ```bash
 docker compose up -d
+docker compose ps
 ```
 
----
+This starts the services defined in the Docker Compose configuration.
 
-## Run Backend
+### 4. Run the Backend
+
+Navigate to the backend directory:
 
 ```bash
 cd backend
+```
+
+**Windows:**
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+**Linux / macOS:**
+
+```bash
 ./mvnw spring-boot:run
 ```
 
----
+Alternatively, use an installed Maven distribution if the wrapper is unavailable:
 
-## Run Frontend
+```bash
+mvn spring-boot:run
+```
+
+Ensure the database is running and the application configuration matches your local database settings. Flyway migrations run according to the active application configuration.
+
+### 5. Run the Frontend
+
+Open another terminal:
 
 ```bash
 cd frontend
@@ -147,39 +162,59 @@ npm install
 npm run dev
 ```
 
----
+Open the local address displayed by Vite in your browser.
 
-Flyway database migrations execute automatically when the backend starts.
+### 6. Verify the Application
 
----
+Confirm that the frontend loads, the backend starts successfully, and the database connection works. Test organization registration, account activation, authentication, and protected routes using the configured application environment.
 
-# Documentation
+## Configuration
 
-Project documentation is maintained under the `docs` directory.
+Environment-specific settings may include:
 
-Documentation includes:
+- Database URL and credentials
+- Server port
+- Email service settings
+- Frontend API base URL
+- Security-related configuration
 
-- Product Requirement Document (PRD)
-- Software Requirement Specification (SRS)
-- Architecture Decision Records (ADR)
-- API Documentation
-- Architecture Documents
+Keep local configuration and production secrets separate from committed source files. Refer to the backend configuration files and Docker Compose definition for the settings required by the current implementation.
 
----
+## Documentation
 
-# Contributing
+Project documentation is maintained in the `docs/` directory.
 
-Although Nexus is currently developed as a personal engineering project, contributions, suggestions, and discussions are always welcome.
+| Document | Description |
+|---|---|
+| PRD | Product vision, scope, objectives, and functional requirements |
+| SRS | Functional and non-functional requirements |
+| ADRs | Rationale behind significant architectural decisions |
+| Architecture | Application structure, module boundaries, and system interactions |
+| API Documentation | Endpoint contracts, request and response formats, and authorization requirements |
 
-If you'd like to contribute:
+Documentation should evolve alongside the implementation to keep product requirements and architectural decisions aligned with the codebase.
 
-1. Fork the repository
-2. Create a feature branch
-3. Commit your changes
-4. Open a Pull Request
+## Contributing
 
----
+Nexus is currently developed as a personal engineering project. Suggestions, bug reports, and constructive discussions are welcome.
 
-# License
+1. Fork the repository.
+2. Create a feature branch.
+3. Make focused changes that align with the project's scope.
+4. Test your changes.
+5. Submit a pull request describing the problem, solution, and validation performed.
+
+For substantial changes, discuss the proposed approach before implementation to maintain alignment with the project's architecture and direction.
+
+## License
 
 This project is licensed under the MIT License.
+
+---
+
+<div align="center">
+
+**NEXUS**  
+*Shared modules. Independent organizations. Unified business management.*
+
+</div>
